@@ -1,0 +1,53 @@
+# Visualisation for distribution of execution time across strategies:
+import matplotlib.pyplot as plt
+ 
+# Sample data (replace with your actual data)
+execution_times = {
+	"static": [10, 12, 15, 18, 20],
+	"stack": [8, 10, 11, 13, 14],
+	"heap": [15, 18, 20, 22, 25]
+}
+ 
+strategies = list(execution_times.keys())
+ 
+plt.figure(figsize=(8, 6))
+plt.boxplot(execution_times.values(), labels=strategies, notch=True)
+plt.xlabel("Memory Management Strategy")
+plt.ylabel("Execution Time (ms)")
+plt.title("Distribution of Execution Time Across Strategies")
+plt.grid(True)
+plt.show()
+ 
+ 
+sample implementation of graph:
+
+
+ 
+# code:
+from flask import Flask, request, jsonify
+from sklearn.ensemble import RandomForestClassifier
+ 
+app = Flask(__name__)
+ 
+# Replace with your feature extraction and prediction logic
+def predict_performance(code):
+	# Extract features from the code
+	features = extract_features(code)
+	
+	# Make prediction using the trained model
+	prediction = model.predict([features])[0]
+	
+	return prediction
+ 
+# Load the pre-trained model (replace with your training logic)
+model = RandomForestClassifier()
+model.load_model("memory_management_model.pkl")
+ 
+@app.route("/predict", methods=["POST"])
+def predict():
+	if request.method == "POST":
+    	code = request.form["code"]
+    	prediction = predict_performance(code)
+    	return jsonify({"prediction": prediction})
+ 
+if __name__ == "__main__":
